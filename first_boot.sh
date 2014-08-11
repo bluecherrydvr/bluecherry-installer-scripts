@@ -37,3 +37,5 @@ dpkg -i /root/bc.deb || true
 echo $LINENO
 apt-get --yes -f install
 echo $LINENO
+
+mv /target/etc/rc.local{.bkp,}
