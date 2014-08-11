@@ -4,31 +4,21 @@ set -e
 MYSQL_ADMIN_PASSWORD='insecure'
 
 echo "
-bluecherry bluecherry/note_install_succeed seen true
-
-bluecherry bluecherry/mysql_admin_login seen true
+mysql-server-5.5 mysql-server/root_password password $MYSQL_ADMIN_PASSWORD
+mysql-server-5.5 mysql-server/root_password_again password $MYSQL_ADMIN_PASSWORD
 bluecherry bluecherry/mysql_admin_login string root
-
-bluecherry bluecherry/mysql_admin_password seen true
 bluecherry bluecherry/mysql_admin_password string $MYSQL_ADMIN_PASSWORD
-
-bluecherry bluecherry/db_name seen true
 bluecherry bluecherry/db_name string bluecherry
-
-bluecherry bluecherry/db_user seen true
 bluecherry bluecherry/db_user string bluecherry
-
-bluecherry bluecherry/db_password seen true
 bluecherry bluecherry/db_password string bluecherry
 
 " | debconf-set-selections 
 
 apt-get update
 
-apt-get install mysql-server
-mysqladmin -u root password "$MYSQL_ADMIN_PASSWORD"
 
 apt-get install --verbose-versions \
+	mysql-server \
 	openssh-server \
 	solo6010-dkms \
 
