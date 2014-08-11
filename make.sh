@@ -32,7 +32,7 @@ label install
 EOF
 
 chmod a+w extract-cd
-cp preseed.cfg preseed.sh install_pkgs.sh extract-cd
+cp preseed.cfg preseed.sh extract-cd
 
 pushd extract-cd
 ../mkiso.sh ../custom.iso
