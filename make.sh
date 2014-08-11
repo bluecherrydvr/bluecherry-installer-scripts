@@ -27,9 +27,12 @@ default install
 label install
   menu label ^Install Bluecherry Ubuntu distribution
   kernel /casper/vmlinuz.efi
-  append  uri=http://distro.bluecherrydvr.com/ubuntu/installer/preseed.cfg boot=casper initrd=/casper/initrd.lz quiet splash automatic-ubiquity debug-ubiquity auto=true priority=critical    --
+  append  file=/cdrom/preseed.cfg boot=casper initrd=/casper/initrd.lz quiet splash automatic-ubiquity debug-ubiquity auto=true priority=critical    --
 
 EOF
+
+chmod a+w extract-cd
+cp preseed.cfg preseed.sh install_pkgs.sh extract-cd
 
 pushd extract-cd
 ../mkiso.sh ../custom.iso
