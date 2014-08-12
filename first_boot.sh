@@ -2,9 +2,14 @@
 set -e
 set -x
 
-MYSQL_ADMIN_PASSWORD='insecure'
+service lightdm stop
+chvt 1
 
-echo $LINENO
+echo 'Please change password for default user, "bcadmin"; its current value is "insecure"'
+passwd bcadmin || true
+echo 'Please enter password for MySQL "root" user:'
+IFS="\n" read MYSQL_ADMIN_PASSWORD || true
+
 echo "
 mysql-server-5.5 mysql-server/root_password password $MYSQL_ADMIN_PASSWORD
 mysql-server-5.5 mysql-server/root_password_again password $MYSQL_ADMIN_PASSWORD
@@ -16,10 +21,8 @@ bluecherry bluecherry/db_password string bluecherry
 
 " | debconf-set-selections 
 
-echo $LINENO
 apt-get update
 
-echo $LINENO
 apt-get install --yes --verbose-versions \
 	mysql-server \
 	openssh-server \
@@ -29,7 +32,6 @@ apt-get install --yes --verbose-versions \
 
 
 # TODO Populate package with fixed postinst into repos and install via apt-get
-echo $LINENO
 if [[ `arch` == 'x86_64' ]]
 then
 	ARCH='amd64'
@@ -38,12 +40,13 @@ else
 fi
 
 wget "http://lizard.bluecherry.net/~autkin/release_2.3.6/trusty/bluecherry_2.3.6_${ARCH}.deb" -O /root/bc.deb
-echo $LINENO
 dpkg -i /root/bc.deb || true
 
-echo $LINENO
 apt-get --yes -f install
-echo $LINENO
 
 mv /etc/rc.local{.bkp,}
 rm $0
+rm /root/bc.deb
+
+service lightdm start
+chvt 7
