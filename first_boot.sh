@@ -1,5 +1,4 @@
 #!/bin/bash
-set -x
 
 service lightdm stop
 chvt 1
@@ -8,6 +7,8 @@ echo 'Please change password for default user, "bcadmin"; its current value is "
 passwd bcadmin || true
 echo 'Please enter password for MySQL "root" user:'
 IFS="\n" read MYSQL_ADMIN_PASSWORD || true
+
+set -x
 
 echo "
 mysql-server-5.5 mysql-server/root_password password $MYSQL_ADMIN_PASSWORD
