@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+set -x
 
 ISOFILE=ubuntu-14.04.1-desktop-amd64.iso
 if ! [[ -f $ISOFILE ]]
@@ -13,10 +14,21 @@ mkdir mnt
 sudo mount -o loop $ISOFILE mnt
 
 # extract
-sudo rm -rf extract-cd || true
+sudo rm -rf extract-cd squashfs.unpacked || true
 mkdir extract-cd
 rsync -a mnt/ extract-cd
 sudo umount mnt/
+
+sudo unsquashfs -d squashfs.unpacked extract-cd/casper/filesystem.squashfs
+sudo chmod u+w extract-cd/casper/filesystem.squashfs squashfs.unpacked squashfs.unpacked/etc/apt/sources.list
+sudo chroot squashfs.unpacked bash -c ": \
+	     && wget -O - -q http://distro.bluecherrydvr.com/key/bluecherry-distro-archive-keyring.gpg | apt-key add - \
+	     && add-apt-repository 'deb http://distro.bluecherrydvr.com/ubuntu/ precise main' \
+	     && apt-get update \
+	     && apt-get remove --yes ubiquity-slideshow-ubuntu \
+	     && apt-get install --yes bluecherry-live plymouth-theme-bluecherry-logo \
+	     "
+sudo mksquashfs squashfs.unpacked extract-cd/casper/filesystem.squashfs -noappend
 
 # Very useful link: https://groups.google.com/forum/#!topic/packer-tool/SWhoARVwVnM
 

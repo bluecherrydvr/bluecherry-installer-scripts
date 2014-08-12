@@ -28,6 +28,7 @@ apt-get install --yes --verbose-versions \
 	openssh-server \
 	solo6010-dkms \
 	bluecherry-artwork \
+	plymouth-theme-bluecherry-logo \
 
 #	bluecherry \
 
