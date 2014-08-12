@@ -1,8 +1,5 @@
 #!/bin/bash
 
-service lightdm stop
-chvt 1
-
 echo 'Please change password for default user, "bcadmin"; its current value is "insecure"'
 passwd bcadmin || true
 echo 'Please enter password for MySQL "root" user:'

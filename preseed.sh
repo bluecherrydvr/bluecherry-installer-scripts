@@ -7,7 +7,10 @@ cp /target/etc/rc.local{,.bkp}
 
 cat << 'EOF' > /target/etc/rc.local
 #!/bin/bash -e
-/root/first_boot.sh 2>&1 | tee -a /root/first_boot.log
+
+service lightdm stop
+sleep 2
+openvt --console=8 --force --switch --wait -- bash -c "/root/first_boot.sh 2>&1 | tee -a /root/first_boot.log"
 EOF
 
 
