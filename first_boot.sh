@@ -30,7 +30,14 @@ apt-get install --yes --verbose-versions \
 
 # TODO Populate package with fixed postinst into repos and install via apt-get
 echo $LINENO
-wget "http://lizard.bluecherry.net/~autkin/tmp/trusty/bluecherry_2.3.5-4_amd64.deb" -O /root/bc.deb
+if [[ `arch` == 'x86_64' ]]
+then
+	ARCH='amd64'
+else
+	ARCH='i386'
+fi
+
+wget "http://lizard.bluecherry.net/~autkin/release_2.3.6/trusty/bluecherry_2.3.6_${ARCH}.deb" -O /root/bc.deb
 echo $LINENO
 dpkg -i /root/bc.deb || true
 
@@ -38,4 +45,5 @@ echo $LINENO
 apt-get --yes -f install
 echo $LINENO
 
-mv /target/etc/rc.local{.bkp,}
+mv /etc/rc.local{.bkp,}
+rm $0
