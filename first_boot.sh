@@ -53,4 +53,5 @@ rm $0
 rm /root/bc.deb
 
 service lightdm start
+sleep 1
 chvt 7
