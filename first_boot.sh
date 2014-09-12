@@ -19,13 +19,18 @@ bluecherry bluecherry/db_password string bluecherry
 " | debconf-set-selections 
 
 apt-get update
-apt-get remove --yes ubuntu-artwork
+apt-get remove --yes \
+	ubuntu-artwork \
+	unity \
+
+
 apt-get install --yes --verbose-versions \
 	mysql-server \
 	openssh-server \
 	solo6010-dkms \
 	bluecherry-artwork \
 	plymouth-theme-bluecherry-logo \
+	gnome-session-flashback \
 
 #	bluecherry \
 
