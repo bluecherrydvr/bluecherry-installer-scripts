@@ -43,7 +43,7 @@ else
 	ARCH='i386'
 fi
 
-wget "http://lizard.bluecherry.net/~autkin/release_2.3.9/trusty/bluecherry_2.3.9_${ARCH}.deb" -O /root/bc.deb
+wget "http://lizard.bluecherry.net/~autkin/release_2.3.9-2/trusty/bluecherry_2.3.9-2_${ARCH}.deb" -O /root/bc.deb
 dpkg -i /root/bc.deb || true
 
 apt-get --yes -f install
