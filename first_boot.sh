@@ -21,7 +21,6 @@ bluecherry bluecherry/db_password string bluecherry
 apt-get update
 apt-get remove --yes \
 	ubuntu-artwork \
-	unity \
 
 
 apt-get install --yes --verbose-versions \
