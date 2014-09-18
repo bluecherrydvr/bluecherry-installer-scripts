@@ -51,6 +51,7 @@ mv /etc/rc.local{.bkp,}
 rm $0
 rm /root/bc.deb
 
-service lightdm start
-sleep 5
-chvt 7
+echo -e "[SeatDefaults]\nuser-session=gnome-fallback" >> /usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf
+
+# chvt + lightdm restart don't work stable - user is often mysteriously thrown to tty1, so we reboot to stay safe and stable
+reboot
