@@ -45,6 +45,9 @@ fi
 wget "http://lizard.bluecherry.net/~autkin/release_2.3.9-2/trusty/bluecherry_2.3.9-2_${ARCH}.deb" -O /root/bc.deb
 dpkg -i /root/bc.deb || true
 
+wget "http://downloads.bluecherrydvr.com/client/2.2.0/bluecherry-client_2.2.0-1_${ARCH}.deb" -O /root/bc-client.deb
+dpkg -i /root/bc-client.deb || true
+
 apt-get --yes -f install
 
 mv /etc/rc.local{.bkp,}
