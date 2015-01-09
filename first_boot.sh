@@ -42,7 +42,8 @@ else
 	ARCH='i386'
 fi
 
-wget "http://lizard.bluecherry.net/~autkin/release_2.3.13/trusty/bluecherry_2.3.13_${ARCH}.deb" -O /root/bc.deb
+BC_VER=2.3.14
+wget "http://lizard.bluecherry.net/~autkin/release_${BC_VER}/trusty/bluecherry_${BC_VER}_${ARCH}.deb" -O /root/bc.deb
 dpkg -i /root/bc.deb || true
 
 wget "http://downloads.bluecherrydvr.com/client/2.2.0/bluecherry-client_2.2.0-1_${ARCH}.deb" -O /root/bc-client.deb
