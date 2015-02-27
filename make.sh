@@ -83,7 +83,7 @@ sudo mksquashfs squashfs.unpacked extract-cd/casper/filesystem.squashfs -noappen
 
 # Very useful link: https://groups.google.com/forum/#!topic/packer-tool/SWhoARVwVnM
 
-# Update isolinux/txt.cfg to use our preseed file, available via HTTP
+# Update isolinux/txt.cfg to use our preseed file
 chmod a+w extract-cd/isolinux/txt.cfg
 cat << 'EOF' > extract-cd/isolinux/txt.cfg
 default install
@@ -92,6 +92,35 @@ label install
   kernel /casper/vmlinuz.efi
   append  file=/cdrom/preseed.cfg boot=casper initrd=/casper/initrd.lz quiet splash automatic-ubiquity debug-ubiquity auto=true priority=critical    --
 
+EOF
+
+# Update grub.cfg (used when booting from UEFI) to use our preseed file
+chmod a+w extract-cd/boot/grub/grub.cfg
+cat << 'EOF' > extract-cd/boot/grub/grub.cfg
+if loadfont /boot/grub/font.pf2 ; then
+    set gfxmode=auto
+    insmod efi_gop
+    insmod efi_uga
+    insmod gfxterm
+    terminal_output gfxterm
+fi
+
+set menu_color_normal=white/black
+set menu_color_highlight=black/light-gray
+
+set default="0"
+set timeout=5
+
+menuentry "Install Ubuntu" {
+    set gfxpayload=keep
+    linux   /casper/vmlinuz.efi file=/cdrom/preseed.cfg boot=casper initrd=/casper/initrd.lz quiet splash automatic-ubiquity debug-ubiquity auto=true priority=critical --
+    initrd  /casper/initrd.lz
+}
+menuentry "Check disc for defects" {
+    set gfxpayload=keep
+    linux   /casper/vmlinuz.efi  boot=casper integrity-check quiet splash --
+    initrd  /casper/initrd.lz
+}
 EOF
 
 chmod a+w extract-cd
