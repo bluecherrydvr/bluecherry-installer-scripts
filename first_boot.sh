@@ -68,5 +68,13 @@ URL=https://127.0.0.1:7001/
 Icon=text-html
 " > /home/bcadmin/Desktop/webui.desktop
 
+echo "[Desktop Entry]
+Version=0
+Name=Bluecherry Client
+Comment=Application to view events and live camera video
+Exec=/usr/bin/bluecherry-client
+Terminal=false
+" > /home/bcadmin/Desktop/bc-client.desktop
+
 # chvt + lightdm restart don't work stable - user is often mysteriously thrown to tty1, so we reboot to stay safe and stable
 reboot
