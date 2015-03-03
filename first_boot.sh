@@ -76,5 +76,10 @@ Exec=/usr/bin/bluecherry-client
 Terminal=false
 " > /home/bcadmin/Desktop/bc-client.desktop
 
+echo "#!/bin/bash
+/usr/bin/bluecherry-client &
+" > /home/bcadmin/.xsession
+chmod +x /home/bcadmin/.xsession
+
 # chvt + lightdm restart don't work stable - user is often mysteriously thrown to tty1, so we reboot to stay safe and stable
 reboot
