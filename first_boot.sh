@@ -18,6 +18,9 @@ bluecherry bluecherry/db_password string bluecherry
 
 " | debconf-set-selections 
 
+wget -O - -q http://distro.bluecherrydvr.com/key/bluecherry-distro-archive-keyring.gpg | apt-key add -
+add-apt-repository 'deb http://ubuntu.bluecherrydvr.com trusty main'
+
 apt-get update
 apt-get remove --yes \
 	ubuntu-artwork \
