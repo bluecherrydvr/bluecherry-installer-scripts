@@ -7,7 +7,7 @@ export LC_ALL= LANG=
 ISOFILE=ubuntu-14.04.1-desktop-amd64.iso
 if ! [[ -f $ISOFILE ]]
 then
-	wget http://releases.ubuntu.com/14.04.1/ubuntu-14.04.1-desktop-amd64.iso -O $ISOFILE
+	wget http://releases.ubuntu.com/14.04.3/ubuntu-14.04.3-desktop-amd64.iso -O $ISOFILE
 fi
 
 # mount
@@ -27,6 +27,7 @@ sudo chmod u+w extract-cd/casper/filesystem.squashfs squashfs.unpacked squashfs.
 sudo bash -c "echo 'en_US.UTF-8 UTF-8' > squashfs.unpacked/etc/locale.gen"
 
 sudo chroot squashfs.unpacked bash -c ": \
+	     && echo nameserver 8.8.8.8 > /etc/resolv.conf \
 	     && wget -O - -q http://distro.bluecherrydvr.com/key/bluecherry-distro-archive-keyring.gpg | apt-key add - \
 	     && add-apt-repository 'deb http://distro.bluecherrydvr.com/ubuntu/ precise main' \
 	     && apt-get update \
