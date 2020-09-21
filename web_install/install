@@ -107,7 +107,16 @@ stretch_install()
     wget --output-document=/etc/apt/sources.list.d/bluecherry-stretch.list https://dl.bluecherrydvr.com/sources.list.d/bluecherry-stretch.list
     apt-get -y update
     apt-get -y install mysql-server bluecherry
+}
 
+focal_install()
+{
+    apt-get -y install gnupg
+    wget -q https://dl.bluecherrydvr.com/key/bluecherry.asc -O- | apt-key add -
+    wget -q http://repo.mysql.com/RPM-GPG-KEY-mysql -O- | apt-key add -
+    wget --output-document=/etc/apt/sources.list.d/bluecherry-stretch.list https://dl.bluecherrydvr.com/sources.list.d/bluecherry-focal.list
+    apt-get -y update
+    apt-get -y install mysql-server bluecherry
 }
 
 if   [ $(check_distro) == "xenial" ]; then
@@ -120,6 +129,8 @@ elif [ $(check_distro) == "centos_7" ]; then
     centos_7_install
 elif [ $(check_distro) == "jessie" ]; then 
     jessie_install
+elif [ $(check_distro) == "focal" ]; then 
+    focal_install
 elif [ $(check_distro) == "wheezy" ]; then 
     wheezy_install
     elif [ $(check_distro) == "stretch" ]; then 
