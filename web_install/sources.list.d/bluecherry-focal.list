@@ -1,4 +1,4 @@
 # Please post any problems to http://forums.bluecherrydvr.com or ubuntu@bluecherrydvr.com
-deb http://ubuntu.bluecherrydvr.com focal main # Bluecherry Ubuntu 20.04 LTS packages
+deb http://unstable.bluecherrydvr.com focal main # Bluecherry Ubuntu 20.04 LTS packages
 
 
