@@ -114,7 +114,7 @@ focal_install()
     apt-get -y install gnupg
     wget -q https://dl.bluecherrydvr.com/key/bluecherry.asc -O- | apt-key add -
     wget -q http://repo.mysql.com/RPM-GPG-KEY-mysql -O- | apt-key add -
-    wget --output-document=/etc/apt/sources.list.d/bluecherry-stretch.list https://dl.bluecherrydvr.com/sources.list.d/bluecherry-focal.list
+    wget --output-document=/etc/apt/sources.list.d/bluecherry-focal.list https://raw.githubusercontent.com/bluecherrydvr/bluecherry-installer-scripts/master/web_install/sources.list.d/bluecherry-focal.list
     apt-get -y update
     apt-get -y install mysql-server bluecherry
 }
